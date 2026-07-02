@@ -1,0 +1,9 @@
+﻿.vs/
+out/
+build/
+x64/
+Debug/
+Release/
+CMakeCache.txt
+CMakeFiles/
+*.vcxproj.user
