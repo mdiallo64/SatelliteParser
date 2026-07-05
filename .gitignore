@@ -7,3 +7,5 @@ Release/
 CMakeCache.txt
 CMakeFiles/
 *.vcxproj.user
+CMakePresets.json
+CppProperties.json
