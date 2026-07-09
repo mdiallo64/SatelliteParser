@@ -28,31 +28,31 @@ namespace TLEParser
 			//Get satellite name and move to next line
 			std::string name{};
 			name = data;
-			std::cout << "Name: " << name << '\n';
 
 			//Reads the entire line into data variable
 			//Since TLE files have fixed position, can always skip to position 2 for catalog num
 			std::getline(input, data);
 			std::string catNum = data.substr(2, 5);
-			std::cout << "Catalog number: " << catNum << '\n';
 
 			std::getline(input, data);
 			double inclination = std::stod(data.substr(8, 8)); //converts from string to double for math purposes
-			std::cout << "Inclination:" << inclination << '\n';
 
 
 	
 			std::string temp = data.substr(26, 7);
 			temp.insert(0, "0.");
 			double eccentricity = std::stod(temp);
-			std::cout << "Eccentricity: " << eccentricity << '\n';
 
 			double meanMotion = std::stod(data.substr(52, 11));
-			std::cout << "Mean motion: " << meanMotion << '\n' << '\n';
 
-			//each time a satellite is read, it is added to a vector
+
+			//constructs and add a satellite to the vector
 			satellites.emplace_back(name, catNum, inclination, eccentricity, meanMotion);
+			
+
 		}
+		std::cout << satellites.size() << " satellites loaded\n";
+		std::cout << '\n';
 		return satellites;
 	}
 }
