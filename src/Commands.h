@@ -7,17 +7,17 @@
 
 namespace Commands
 {
-	void List(std::vector<Satellite> satellites)
+	void List(const std::vector<Satellite>& satellites)
 	{
-		//for (auto& satellite : satellites)
-		//{
-		//	std::cout << satellite.getName() << '\n';
-		//	std::cout << satellite.catalogNum() << '\n';
-		//	std::cout << satellite.inclination() << '\n';
-		//	std::cout << satellite.eccentricity() << '\n';
-		//	std::cout << satellite.meanMotion() << '\n';
-		//	std::cout << '\n';
-		//}
+		for (auto& satellite : satellites)
+		{
+			std::cout << satellite.getName() << '\n';
+			std::cout << satellite.getCatalogNum() << '\n';
+			std::cout << satellite.getInclination() << '\n';
+			std::cout << satellite.getEccentricity() << '\n';
+			std::cout << satellite.getMeanMotion() << '\n';
+			std::cout << '\n';
+		}
 	}
 }
 #endif
