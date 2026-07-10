@@ -48,6 +48,7 @@ namespace TLEParser
 
 			//constructs and add a satellite to the vector
 			satellites.emplace_back(name, catNum, inclination, eccentricity, meanMotion);
+
 			
 
 		}

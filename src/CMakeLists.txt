@@ -1,4 +1,4 @@
-add_executable(SatelliteParser main.cpp "TLEParser.h" "Commands.h")
+add_executable(SatelliteParser main.cpp "TLEParser.h" "Commands.h" "ParseInput.h")
 set_property(TARGET SatelliteParser PROPERTY CXX_STANDARD 20)
 
 add_custom_command(TARGET SatelliteParser POST_BUILD

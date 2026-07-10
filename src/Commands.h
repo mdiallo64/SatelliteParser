@@ -19,5 +19,13 @@ namespace Commands
 			std::cout << '\n';
 		}
 	}
+
+	void Filter(const std::vector<Satellite>& satellites)
+	{
+		for (auto& satellite : satellites)
+		{
+			std::cout << satellite.toString(satellite.calcRegime()) << '\n';
+		}
+	}
 }
 #endif

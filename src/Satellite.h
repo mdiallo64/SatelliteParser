@@ -56,6 +56,23 @@ public:
 			return OrbitRegime::GEO;
 	}
 
+	std::string toString(const OrbitRegime orbitRegime) const
+	{
+		std::string result{};
+
+		switch (orbitRegime)
+		{
+		case OrbitRegime::LEO: 
+			return "LEO";
+		
+		case OrbitRegime::MEO:
+			return "MEO";
+
+		case OrbitRegime::GEO:
+			return "GEO";
+		}
+		return "Unknown";
+	}
 	std::string getName() const { return m_name; }
 	std::string getCatalogNum() const { return m_catalogNum; }
 	double getInclination() const { return m_inclination; }
