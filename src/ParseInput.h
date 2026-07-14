@@ -18,6 +18,12 @@ namespace User
 		Filter
 	};
 
+	struct Transition
+	{
+		States next{};
+		std::function<void(const std::vector<Satellite>&)> action{};
+	};
+
 	States currentState = Main;
 
 	std::string cleanInput(std::string& input)
@@ -27,7 +33,7 @@ namespace User
 		return input;
 	}
 
-	void changeState()
+	void printMenu()
 	{
 		if (currentState == Main)
 		{
@@ -35,7 +41,7 @@ namespace User
 		}
 		else if (currentState == Filter)
 		{
-			std::cout << "Filter menu \n";
+			std::cout << "Filter by LEO MEO GEO all \n";
 		}
 		else
 		{
@@ -43,37 +49,39 @@ namespace User
 		}
 	}
 
-
 	void getInput(const std::vector<Satellite>& satellites)
 	{
 		std::string userCommand{};
 
-		std::unordered_map<std::string, std::unordered_map<User::States, std::function<void(std::vector<Satellite>)>>> commands;
-		commands["list"][States::Main] =  Commands::List;
-		commands["filter"][States::Main] = Commands::Filter;
-		changeState();
+		std::unordered_map<User::States, std::unordered_map<std::string, Transition>> fsm;
+		fsm[States::Main]["list"] = { Main, Commands::List };
+		fsm[States::Main]["filter"] = { Filter, nullptr };
+		fsm[States::Filter]["leo"] = { Filter, Commands::Filter };
+
+
 
 		while (true)
 		{
+			printMenu();
 
 			std::cout << ">> ";
 			std::getline(std::cin, userCommand);
 			cleanInput(userCommand);
 
-			auto it = commands.find(userCommand);
-			if (it != commands.end())
+			auto& commandsForState = fsm[currentState];
+			auto it = commandsForState.find(userCommand);
+			if (it != commandsForState.end())
 			{
-				auto stateMap = it->second;
+				if (it->second.action)
+				{
+					it->second.action(satellites);
+				}
+				currentState = it->second.next;
 
-				auto stateIt = stateMap.find(currentState);
-				if (stateIt != stateMap.end())
-				{
-					stateIt->second(satellites);
-				}
-				else
-				{
-					std::cout << "Command not found";
-				}
+			}
+			else
+			{
+				std::cout << "Command not found\n";
 			}
 		}
 	}
