@@ -40,16 +40,15 @@ namespace User
 	{
 		if (currentState == Main)
 		{
-			std::cout << "Commands: List	Filter\n";
+			std::cout << "Commands: List | Filter\n\n";
+			std::cout << "Quit\n\n\n";
 		}
 		else if (currentState == Filter)
 		{
-			std::cout << "Filter by LEO MEO GEO all \n";
+			std::cout << "Filter By: LEO | MEO | GEO | catalogNum\n\n";
+			std::cout << "Back | Quit\n\n\n";
 		}
-		else
-		{
-
-		}
+		
 	}
 
 	void getInput(const std::vector<Satellite>& satellites)
@@ -61,7 +60,13 @@ namespace User
 		std::unordered_map<User::States, std::unordered_map<std::string, Transition>> fsm;
 		fsm[States::Main]["list"] = { Main, Commands::List };
 		fsm[States::Main]["filter"] = { Filter, nullptr }; //nullptr for when no action is done
-		fsm[States::Filter]["leo"] = { Filter, Commands::Filter };
+		//fsm[States::Main]["catalognumber"] = 
+		fsm[States::Filter]["leo"] = { Filter, Commands::FilterLEO };
+		fsm[States::Filter]["meo"] = { Filter, Commands::FilterMEO };
+		fsm[States::Filter]["geo"] = { Filter, Commands::FilterGEO };
+		fsm[States::Filter]["catalog"] = { Filter, Commands::FilterCatNum };
+		fsm[States::Filter]["back"] = { Main, nullptr };
+
 
 
 
@@ -72,6 +77,8 @@ namespace User
 			std::cout << ">> ";
 			std::getline(std::cin, userCommand);
 			cleanInput(userCommand);
+			std::cout << '\n';
+			if (userCommand == "quit") break;
 
 			//gets the current state to access user input in inner map
 			auto& commandsForState = fsm[currentState];

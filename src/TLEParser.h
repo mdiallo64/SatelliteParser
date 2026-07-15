@@ -52,8 +52,10 @@ namespace TLEParser
 			
 
 		}
+
+		std::cout << "TLE Satellite Parser\n\n";
 		std::cout << satellites.size() << " satellites loaded\n";
-		std::cout << '\n';
+		std::cout << "\n\n\n";
 		return satellites;
 	}
 }
