@@ -20,7 +20,7 @@ namespace Commands
 		}
 	}
 
-	void Filter(const std::vector<Satellite>& satellites)
+	void FilterLEO(const std::vector<Satellite>& satellites)
 	{
 		for (auto& satellite : satellites)
 		{
