@@ -3,6 +3,7 @@
 #include "Satellite.h"
 #include "TLEParser.h"
 #include "ParseInput.h"
+#include <format>
 
 int main()
 {
@@ -10,6 +11,8 @@ int main()
 
 
 	User::getInput(satellites);
+
+
 
 
 	//for (auto& satellite : satellites)

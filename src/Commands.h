@@ -6,6 +6,7 @@
 #include <algorithm>
 #include "Satellite.h"
 #include "StringUtils.h"
+#include <string_view>
 
 namespace Commands
 {
@@ -84,31 +85,41 @@ namespace Commands
 	{
 		for (auto& satellite : satellites)
 		{
-			std::cout << satellite.getCatalogNum() << '\n';
+			std::cout << satellite.getName() << ": " << satellite.getCatalogNum() << '\n';
 		}
 
 	}
 
 
-	void searchByName(const std::vector<Satellite>& satellites, std::string& satellite)
+	void searchByName(const std::vector<Satellite>& satellites)
 	{
-	//	if (std::find(satellites.begin(), satellites.end(), satellite) != satellite.end())
-	//	{
-	//		std::cout << "Found\n";
-	//	}
-	//	else
-	//	{
-	//		std::cout << "Not found\n";
-	//	}
+		bool notFound{ true };
+		std::cout << "Enter satellite name or enter to show all\n\n";
+		std::cout << ">> ";
+
+		std::string satellite{};
+		std::getline(std::cin, satellite);
+
+		std::string original{ satellite }; //to print original string if not found
+		StringUtils::cleanInput(satellite);
+
+		std::string satName{};
 
 		for (auto& s : satellites)
 		{
-			if (s.getName() == StringUtils::cleanInput(satellite))
+			satName = s.getName();
+			StringUtils::removeChar(satName);
+			auto pos{ satName.find(satellite) };
+			if (pos != std::string::npos)
 			{
-				std::cout << satellite << '\n';
+				s.showSat();
+				notFound = false;
 			}
 		}
+		if (notFound)
+		{
+			std::cout << "No satellite named " << original << " found\n\n";
+		}
 	}
-
 }
 #endif

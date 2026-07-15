@@ -42,14 +42,8 @@ namespace User
 		{
 			std::cout << "Filter By: LEO | MEO | GEO | catalogNum\n\n";
 			std::cout << "Back | Quit\n\n\n";
-		}
-		else if (currentState == Search)
-		{
-			std::cout << "Enter satellite name\n\n";
-			std::cout << "Back | Quit\n\n\n";
-
-		}
-		
+			std::cout << "--------------------------------\n";
+		}	
 	}
 
 	void getInput(const std::vector<Satellite>& satellites)
@@ -61,11 +55,11 @@ namespace User
 		std::unordered_map<User::States, std::unordered_map<std::string, Transition>> fsm;
 		fsm[States::Main]["list"] = { Main, Commands::List };
 		fsm[States::Main]["filter"] = { Filter, nullptr }; //nullptr for when no action is done
-		fsm[States::Main]["search"] = { Main, nullptr };
+		fsm[States::Main]["search"] = { Main, Commands::searchByName };
 		fsm[States::Filter]["leo"] = { Filter, Commands::filterLEO };
 		fsm[States::Filter]["meo"] = { Filter, Commands::filterMEO };
 		fsm[States::Filter]["geo"] = { Filter, Commands::filterGEO };
-		//fsm[States::Filter]["catalog"] = { Filter, Commands::filterCatNum };
+		fsm[States::Filter]["catalog"] = { Filter, Commands::filterCatNum };
 		fsm[States::Filter]["back"] = { Main, nullptr };
 		//fsm[States::Search]["search"] = { Search, nullptr};
 
@@ -75,7 +69,7 @@ namespace User
 		{
 			printMenu();
 
-			std::cout << ">> ";
+			std::cout << "Enter Command >> ";
 			std::getline(std::cin, userCommand);
 			StringUtils::cleanInput(userCommand);
 			std::cout << '\n';

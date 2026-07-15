@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 #include <cmath>
-
+#include <format>
 
 //Gravitational parameter of earth
 constexpr double GP{ 3.986e14 }; //m^3/ s^2
@@ -72,6 +72,17 @@ public:
 			return "GEO";
 		}
 		return "Unknown";
+	}
+
+	void showSat() const
+	{
+		std::cout << std::format("{:>16}", "Name: ") << m_name << " \n";
+		std::cout << "Catalog Number: " << m_catalogNum << " \n";
+		std::cout << std::format("{:>16}", "Inclination: ") << m_inclination << " \n";
+		std::cout << std::format("{:>16}", "Eccentricity: ") << m_eccentricity << " \n";
+		std::cout << std::format("{:>16}", "Mean Motion: ") << m_meanMotion << " \n";
+		std::cout << "----------------------------\n\n\n";
+
 	}
 	std::string getName() const { return m_name; }
 	std::string getCatalogNum() const { return m_catalogNum; }
