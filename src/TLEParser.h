@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include "Satellite.h"
+#include <string>
 
 namespace TLEParser
 {
@@ -28,6 +29,8 @@ namespace TLEParser
 			//Get satellite name and move to next line
 			std::string name{};
 			name = data;
+			name.erase(name.find_last_not_of(" \r") + 1); //removes trailing \r on linux systems
+
 
 			//Reads the entire line into data variable
 			//Since TLE files have fixed position, can always skip to position 2 for catalog num
@@ -48,8 +51,6 @@ namespace TLEParser
 
 			//constructs and add a satellite to the vector
 			satellites.emplace_back(name, catNum, inclination, eccentricity, meanMotion);
-
-			
 
 		}
 

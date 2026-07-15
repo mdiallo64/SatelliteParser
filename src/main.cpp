@@ -4,13 +4,13 @@
 #include "TLEParser.h"
 #include "ParseInput.h"
 
-
 int main()
 {
 	std::vector<Satellite> satellites = TLEParser::getData("src/data/data.txt");
 
 
 	User::getInput(satellites);
+
 
 	//for (auto& satellite : satellites)
 	//{

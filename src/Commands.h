@@ -3,7 +3,9 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "Satellite.h"
+#include "StringUtils.h"
 
 namespace Commands
 {
@@ -21,7 +23,7 @@ namespace Commands
 		std::cout << '\n';
 	}
 
-	void FilterLEO(const std::vector<Satellite>& satellites)
+	void filterLEO(const std::vector<Satellite>& satellites)
 	{
 		std::cout << "Current filter applied: LEO\n";
 		for (auto& satellite : satellites)
@@ -41,7 +43,7 @@ namespace Commands
 	}
 
 
-	void FilterMEO(const std::vector<Satellite>& satellites)
+	void filterMEO(const std::vector<Satellite>& satellites)
 	{
 
 		for (auto& satellite : satellites)
@@ -60,7 +62,7 @@ namespace Commands
 		}
 	}
 
-	void FilterGEO(const std::vector<Satellite>& satellites)
+	void filterGEO(const std::vector<Satellite>& satellites)
 	{
 		for (auto& satellite : satellites)
 		{
@@ -78,7 +80,7 @@ namespace Commands
 		}
 	}
 
-	void FilterCatNum(const std::vector<Satellite>& satellites)
+	void filterCatNum(const std::vector<Satellite>& satellites)
 	{
 		for (auto& satellite : satellites)
 		{
@@ -87,6 +89,26 @@ namespace Commands
 
 	}
 
+
+	void searchByName(const std::vector<Satellite>& satellites, std::string& satellite)
+	{
+	//	if (std::find(satellites.begin(), satellites.end(), satellite) != satellite.end())
+	//	{
+	//		std::cout << "Found\n";
+	//	}
+	//	else
+	//	{
+	//		std::cout << "Not found\n";
+	//	}
+
+		for (auto& s : satellites)
+		{
+			if (s.getName() == StringUtils::cleanInput(satellite))
+			{
+				std::cout << satellite << '\n';
+			}
+		}
+	}
 
 }
 #endif

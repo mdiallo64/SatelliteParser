@@ -6,8 +6,7 @@
 #include <unordered_map>
 #include <functional>
 #include "Satellite.h"
-#include <cctype>
-#include <algorithm>
+#include "StringUtils.h"
 
 namespace User
 {
@@ -15,7 +14,8 @@ namespace User
 	enum States
 	{
 		Main,
-		Filter
+		Filter,
+		Search
 	};
 
 	struct Transition
@@ -26,27 +26,28 @@ namespace User
 		std::function<void(const std::vector<Satellite>&)> action{};
 	};
 
+
+
 	States currentState = Main;
 
-
-	std::string cleanInput(std::string& input)//removes whitespace and turns user input lowercase to match map key
-	{
-		input.erase(std::remove_if(input.begin(), input.end(), ::isspace), input.end());
-		std::transform(input.begin(), input.end(), input.begin(), ::tolower);
-		return input;
-	}
 
 	void printMenu()//what user sees based off current state
 	{
 		if (currentState == Main)
 		{
-			std::cout << "Commands: List | Filter\n\n";
+			std::cout << "Commands: List | Filter | Search\n\n";
 			std::cout << "Quit\n\n\n";
 		}
 		else if (currentState == Filter)
 		{
 			std::cout << "Filter By: LEO | MEO | GEO | catalogNum\n\n";
 			std::cout << "Back | Quit\n\n\n";
+		}
+		else if (currentState == Search)
+		{
+			std::cout << "Enter satellite name\n\n";
+			std::cout << "Back | Quit\n\n\n";
+
 		}
 		
 	}
@@ -60,13 +61,13 @@ namespace User
 		std::unordered_map<User::States, std::unordered_map<std::string, Transition>> fsm;
 		fsm[States::Main]["list"] = { Main, Commands::List };
 		fsm[States::Main]["filter"] = { Filter, nullptr }; //nullptr for when no action is done
-		//fsm[States::Main]["catalognumber"] = 
-		fsm[States::Filter]["leo"] = { Filter, Commands::FilterLEO };
-		fsm[States::Filter]["meo"] = { Filter, Commands::FilterMEO };
-		fsm[States::Filter]["geo"] = { Filter, Commands::FilterGEO };
-		fsm[States::Filter]["catalog"] = { Filter, Commands::FilterCatNum };
+		fsm[States::Main]["search"] = { Main, nullptr };
+		fsm[States::Filter]["leo"] = { Filter, Commands::filterLEO };
+		fsm[States::Filter]["meo"] = { Filter, Commands::filterMEO };
+		fsm[States::Filter]["geo"] = { Filter, Commands::filterGEO };
+		//fsm[States::Filter]["catalog"] = { Filter, Commands::filterCatNum };
 		fsm[States::Filter]["back"] = { Main, nullptr };
-
+		//fsm[States::Search]["search"] = { Search, nullptr};
 
 
 
@@ -76,7 +77,7 @@ namespace User
 
 			std::cout << ">> ";
 			std::getline(std::cin, userCommand);
-			cleanInput(userCommand);
+			StringUtils::cleanInput(userCommand);
 			std::cout << '\n';
 			if (userCommand == "quit") break;
 
