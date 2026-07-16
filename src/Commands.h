@@ -10,6 +10,15 @@
 
 namespace Commands
 {
+	void printHeader()
+	{
+		std::cout << std::format("{:<25}", "Name");
+		std::cout << std::format("{:<20}", "Catalog Number");
+		std::cout << std::format("{:<18}", "Inclination");
+		std::cout << std::format("{:<21}", "Eccentricity");
+		std::cout << std::format("{:<20}", "Mean Motion");
+		std::cout << '\n';
+	}
 	void List(const std::vector<Satellite>& satellites)
 	{
 		for (auto& satellite : satellites)
@@ -27,58 +36,93 @@ namespace Commands
 	void filterLEO(const std::vector<Satellite>& satellites)
 	{
 		std::cout << "Current filter applied: LEO\n";
+		std::vector<Satellite> s{};
+		bool notFound{ true };
 		for (auto& satellite : satellites)
 		{
 			std::string orbType = satellite.toString(satellite.calcRegime());
-			if (orbType != "LEO")
+			if (orbType == "LEO")
 			{
-				std::cout << "No LEO satellites in found\n";
-				break;
-			}
-			else
+				s.push_back(satellite);
+				notFound = false;
+			}			
+		}
+		if (!notFound)
+		{
+			printHeader();
+			for (auto& sat : s)
 			{
-				std::cout << satellite.getName() << '\n';
-				//std::cout << orbType << '\n';
+				sat.Satellite::showSat();
 			}
 		}
+		else
+		{
+			std::cout << "No LEO satellites found";
+		}
+		std::cout << '\n';
 	}
+
+
 
 
 	void filterMEO(const std::vector<Satellite>& satellites)
 	{
-
+		std::cout << "Current filter applied: MEO\n";
+		std::vector<Satellite> s{};
+		bool notFound{ true };
 		for (auto& satellite : satellites)
 		{
 			std::string orbType = satellite.toString(satellite.calcRegime());
-			if (orbType != "MEO")
+			if (orbType == "MEO")
 			{
-				std::cout << "No MEO satellites in found\n";
-				break;
-			}
-			else
-			{
-				std::cout << satellite.getName();
-				std::cout << orbType << '\n';
+				s.push_back(satellite);
+				notFound = false;
 			}
 		}
+		if (!notFound)
+		{
+			printHeader();
+			for (auto& sat : s)
+			{
+				sat.Satellite::showSat();
+			}
+
+		}
+		else
+		{
+			std::cout << "No MEO satellites found";
+		}
+		std::cout << '\n';
 	}
 
 	void filterGEO(const std::vector<Satellite>& satellites)
 	{
+		std::cout << "Current filter applied: GEO\n";
+		std::vector<Satellite> s{};
+		bool notFound{ true };
 		for (auto& satellite : satellites)
 		{
 			std::string orbType = satellite.toString(satellite.calcRegime());
-			if (orbType != "GEO")
+			if (orbType == "GEO")
 			{
-				std::cout << "No GEO satellites in found\n";
-				break;
-			}
-			else
-			{
-				std::cout << satellite.getName();
-				std::cout << orbType << '\n';
+				s.push_back(satellite);
+				notFound = false;
 			}
 		}
+		if (!notFound)
+		{
+			printHeader();
+			for (auto& sat : s)
+			{
+				sat.Satellite::showSat();
+				std::cout << '\n';
+			}
+		}
+		else
+		{
+			std::cout << "No GEO satellites found";
+		}
+		std::cout << '\n';
 	}
 
 	void filterCatNum(const std::vector<Satellite>& satellites)

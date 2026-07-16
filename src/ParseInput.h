@@ -35,14 +35,12 @@ namespace User
 	{
 		if (currentState == Main)
 		{
-			std::cout << "Commands: List | Filter | Search\n\n";
-			std::cout << "Quit\n\n\n";
+			std::cout << "Commands: list | filter | search | quit\n\n";
+
 		}
 		else if (currentState == Filter)
 		{
-			std::cout << "Filter By: LEO | MEO | GEO | catalogNum\n\n";
-			std::cout << "Back | Quit\n\n\n";
-			std::cout << "--------------------------------\n";
+			std::cout << "Filter By: LEO | MEO | GEO | catalog | back | quit\n\n";
 		}	
 	}
 
@@ -61,8 +59,6 @@ namespace User
 		fsm[States::Filter]["geo"] = { Filter, Commands::filterGEO };
 		fsm[States::Filter]["catalog"] = { Filter, Commands::filterCatNum };
 		fsm[States::Filter]["back"] = { Main, nullptr };
-		//fsm[States::Search]["search"] = { Search, nullptr};
-
 
 
 		while (true)

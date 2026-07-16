@@ -76,12 +76,18 @@ public:
 
 	void showSat() const
 	{
-		std::cout << std::format("{:>16}", "Name: ") << m_name << " \n";
-		std::cout << "Catalog Number: " << m_catalogNum << " \n";
-		std::cout << std::format("{:>16}", "Inclination: ") << m_inclination << " \n";
-		std::cout << std::format("{:>16}", "Eccentricity: ") << m_eccentricity << " \n";
-		std::cout << std::format("{:>16}", "Mean Motion: ") << m_meanMotion << " \n";
-		std::cout << "----------------------------\n\n\n";
+		//std::cout << std::format("{:>16}", "Name: ") << m_name << " \n";
+		//std::cout << "Catalog Number: " << m_catalogNum << " \n";
+		//std::cout << std::format("{:>16}", "Inclination: ") << m_inclination << " \n";
+		//std::cout << std::format("{:>16}", "Eccentricity: ") << m_eccentricity << " \n";
+		//std::cout << std::format("{:>16}", "Mean Motion: ") << m_meanMotion << " \n";
+
+
+		std::cout << std::format("{:<25}", m_name);
+		std::cout << std::format("{:<20}", m_catalogNum);
+		std::cout << std::format("{:<18}", m_inclination) ;
+		std::cout << std::format("{:<21}", m_eccentricity);
+		std::cout << std::format("{:<15}", m_meanMotion) << '\n';
 
 	}
 	std::string getName() const { return m_name; }
