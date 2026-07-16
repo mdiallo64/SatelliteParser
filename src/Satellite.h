@@ -12,6 +12,9 @@ constexpr double PI{ 3.14159265359 };
 constexpr double EARTHRADIUS{ 6371 }; //km
 
 
+
+
+
 class Satellite
 {
 public:
@@ -41,6 +44,7 @@ public:
 
 	enum class OrbitRegime { LEO, MEO, GEO };
 
+
 	OrbitRegime calcRegime() const
 	{
 		double altitude{ computeAltitude() };
@@ -56,33 +60,9 @@ public:
 			return OrbitRegime::GEO;
 	}
 
-	std::string toString(const OrbitRegime orbitRegime) const
-	{
-		std::string result{};
-
-		switch (orbitRegime)
-		{
-		case OrbitRegime::LEO: 
-			return "LEO";
-		
-		case OrbitRegime::MEO:
-			return "MEO";
-
-		case OrbitRegime::GEO:
-			return "GEO";
-		}
-		return "Unknown";
-	}
 
 	void showSat() const
 	{
-		//std::cout << std::format("{:>16}", "Name: ") << m_name << " \n";
-		//std::cout << "Catalog Number: " << m_catalogNum << " \n";
-		//std::cout << std::format("{:>16}", "Inclination: ") << m_inclination << " \n";
-		//std::cout << std::format("{:>16}", "Eccentricity: ") << m_eccentricity << " \n";
-		//std::cout << std::format("{:>16}", "Mean Motion: ") << m_meanMotion << " \n";
-
-
 		std::cout << std::format("{:<25}", m_name);
 		std::cout << std::format("{:<20}", m_catalogNum);
 		std::cout << std::format("{:<18}", m_inclination) ;
@@ -105,6 +85,24 @@ private:
 	double m_meanMotion{};
 
 };
+
+inline std::string toString(const Satellite::OrbitRegime orbitRegime)
+{
+	std::string result{};
+
+	switch (orbitRegime)
+	{
+	case Satellite::OrbitRegime::LEO:
+		return "LEO";
+
+	case Satellite::OrbitRegime::MEO:
+		return "MEO";
+
+	case Satellite::OrbitRegime::GEO:
+		return "GEO";
+	}
+	return "Unknown";
+}
 
 
 #endif

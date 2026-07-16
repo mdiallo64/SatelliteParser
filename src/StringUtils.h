@@ -4,6 +4,7 @@
 #include <string>
 #include <algorithm>
 #include <cctype>
+#include "Satellite.h"
 
 
 namespace StringUtils
@@ -23,8 +24,6 @@ namespace StringUtils
 		std::erase(input, ')');
 		return input;
 	}
-
-	
 }
 
 

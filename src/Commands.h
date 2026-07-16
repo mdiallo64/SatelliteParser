@@ -24,11 +24,7 @@ namespace Commands
 		for (auto& satellite : satellites)
 		{
 			std::cout << satellite.getName() << '\n';
-			/*std::cout << satellite.getCatalogNum() << '\n';
-			std::cout << satellite.getInclination() << '\n';
-			std::cout << satellite.getEccentricity() << '\n';
-			std::cout << satellite.getMeanMotion() << '\n';
-			std::cout << '\n';*/
+
 		}
 		std::cout << '\n';
 	}
@@ -36,47 +32,59 @@ namespace Commands
 	void filterbyRegime(const std::vector<Satellite>& satellites, const std::string regime)
 	{
 		std::cout << "Current filter applied: " << regime << " \n";
-		std::vector<Satellite> s{};
-		bool notFound{ true };
-		for (auto& satellite : satellites)
+		bool found{ false };
+		for (const auto& satellite : satellites)
 		{
-			std::string orbType = satellite.toString(satellite.calcRegime());
-			if (orbType == regime)
+			if (toString(satellite.calcRegime()) == regime)
 			{
-				s.push_back(satellite);
-				notFound = false;
+				if (!found)
+				{
+					printHeader();
+					found = true;
+				}
+				satellite.showSat();
 			}
+
+
 		}
-		if (!notFound)
+		if (!found)
 		{
-			printHeader();
-			for (auto& sat : s)
-			{
-				sat.Satellite::showSat();
-				std::cout << '\n';
-			}
+			std::cout << "No " << regime << " satellites found\n";
 		}
-		else
-		{
-			std::cout << "No " << regime << " satellites found";
-		}
-		std::cout << '\n';
+
 
 	}
 
 	void filterCatNum(const std::vector<Satellite>& satellites)
 	{
-		for (auto& satellite : satellites)
-		{
-			std::cout << satellite.getName() << ": " << satellite.getCatalogNum() << '\n';
-		}
+		std::cout << "Enter catalog number: ";
+		std::string catalogNum;
+		std::getline(std::cin, catalogNum);
+		StringUtils::cleanInput(catalogNum);
 
+		bool found = false;
+		for (const auto& satellite : satellites)
+		{
+			if (satellite.getCatalogNum().find(catalogNum) != std::string::npos)
+			{
+				if (!found)
+				{
+					printHeader();
+					found = true;
+				}
+				satellite.showSat();
+			}
+		}
+		if (!found)
+		{
+			std::cout << "No satellite with catalog number " << catalogNum << " found\n";
+		}
 	}
 
 
 	void searchByName(const std::vector<Satellite>& satellites)
 	{
-		bool notFound{ true };
+		bool found{ false };
 		std::cout << "Enter satellite name or enter to show all\n\n";
 		std::cout << ">> ";
 
@@ -88,6 +96,7 @@ namespace Commands
 
 		std::string satName{};
 
+		printHeader();
 		for (auto& s : satellites)
 		{
 			satName = s.getName();
@@ -96,10 +105,10 @@ namespace Commands
 			if (pos != std::string::npos)
 			{
 				s.showSat();
-				notFound = false;
+				found = true;
 			}
 		}
-		if (notFound)
+		if (!found)
 		{
 			std::cout << "No satellite named " << original << " found\n\n";
 		}

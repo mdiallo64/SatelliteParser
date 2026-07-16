@@ -12,16 +12,5 @@ int main()
 
 	User::getInput(satellites);
 
-
-
-
-	//for (auto& satellite : satellites)
-	//{
-	//	std::cout << satellite.computePeriod() << '\n';
-	//	std::cout << satellite.computeSemiMajorAxis() << '\n';
-	//	std::cout << satellite.computeAltitude() << '\n';
-	//	std::cout << satellite.toString(satellite.calcRegime()) << '\n';
-	//	std::cout << '\n';
- //	}
 	return 0;
 }

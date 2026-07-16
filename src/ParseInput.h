@@ -57,7 +57,7 @@ namespace User
 		fsm[States::Filter]["leo"] = { Filter, [](auto& s) {Commands::filterbyRegime(s, "LEO"); } };
 		fsm[States::Filter]["meo"] = { Filter, [](auto& s) {Commands::filterbyRegime(s, "MEO"); } };
 		fsm[States::Filter]["geo"] = { Filter, [](auto& s) {Commands::filterbyRegime(s, "GEO"); } };
-		fsm[States::Filter]["catalog"] = { Filter, Commands::filterCatNum };
+		fsm[States::Filter]["catalog"] = { Filter, { Commands::filterCatNum } };
 		fsm[States::Filter]["back"] = { Main, nullptr };
 
 
