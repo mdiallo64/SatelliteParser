@@ -33,77 +33,15 @@ namespace Commands
 		std::cout << '\n';
 	}
 
-	void filterLEO(const std::vector<Satellite>& satellites)
+	void filterbyRegime(const std::vector<Satellite>& satellites, const std::string regime)
 	{
-		std::cout << "Current filter applied: LEO\n";
+		std::cout << "Current filter applied: " << regime << " \n";
 		std::vector<Satellite> s{};
 		bool notFound{ true };
 		for (auto& satellite : satellites)
 		{
 			std::string orbType = satellite.toString(satellite.calcRegime());
-			if (orbType == "LEO")
-			{
-				s.push_back(satellite);
-				notFound = false;
-			}			
-		}
-		if (!notFound)
-		{
-			printHeader();
-			for (auto& sat : s)
-			{
-				sat.Satellite::showSat();
-			}
-		}
-		else
-		{
-			std::cout << "No LEO satellites found";
-		}
-		std::cout << '\n';
-	}
-
-
-
-
-	void filterMEO(const std::vector<Satellite>& satellites)
-	{
-		std::cout << "Current filter applied: MEO\n";
-		std::vector<Satellite> s{};
-		bool notFound{ true };
-		for (auto& satellite : satellites)
-		{
-			std::string orbType = satellite.toString(satellite.calcRegime());
-			if (orbType == "MEO")
-			{
-				s.push_back(satellite);
-				notFound = false;
-			}
-		}
-		if (!notFound)
-		{
-			printHeader();
-			for (auto& sat : s)
-			{
-				sat.Satellite::showSat();
-			}
-
-		}
-		else
-		{
-			std::cout << "No MEO satellites found";
-		}
-		std::cout << '\n';
-	}
-
-	void filterGEO(const std::vector<Satellite>& satellites)
-	{
-		std::cout << "Current filter applied: GEO\n";
-		std::vector<Satellite> s{};
-		bool notFound{ true };
-		for (auto& satellite : satellites)
-		{
-			std::string orbType = satellite.toString(satellite.calcRegime());
-			if (orbType == "GEO")
+			if (orbType == regime)
 			{
 				s.push_back(satellite);
 				notFound = false;
@@ -120,9 +58,10 @@ namespace Commands
 		}
 		else
 		{
-			std::cout << "No GEO satellites found";
+			std::cout << "No " << regime << " satellites found";
 		}
 		std::cout << '\n';
+
 	}
 
 	void filterCatNum(const std::vector<Satellite>& satellites)

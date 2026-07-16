@@ -54,9 +54,9 @@ namespace User
 		fsm[States::Main]["list"] = { Main, Commands::List };
 		fsm[States::Main]["filter"] = { Filter, nullptr }; //nullptr for when no action is done
 		fsm[States::Main]["search"] = { Main, Commands::searchByName };
-		fsm[States::Filter]["leo"] = { Filter, Commands::filterLEO };
-		fsm[States::Filter]["meo"] = { Filter, Commands::filterMEO };
-		fsm[States::Filter]["geo"] = { Filter, Commands::filterGEO };
+		fsm[States::Filter]["leo"] = { Filter, [](auto& s) {Commands::filterbyRegime(s, "LEO"); } };
+		fsm[States::Filter]["meo"] = { Filter, [](auto& s) {Commands::filterbyRegime(s, "MEO"); } };
+		fsm[States::Filter]["geo"] = { Filter, [](auto& s) {Commands::filterbyRegime(s, "GEO"); } };
 		fsm[States::Filter]["catalog"] = { Filter, Commands::filterCatNum };
 		fsm[States::Filter]["back"] = { Main, nullptr };
 
