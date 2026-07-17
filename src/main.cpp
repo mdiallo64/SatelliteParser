@@ -5,9 +5,9 @@
 #include "ParseInput.h"
 #include <format>
 
-int main()
+int main(int argc, char* argv[])
 {
-	std::vector<Satellite> satellites = TLEParser::getData("src/data/data.txt");
+	std::vector<Satellite> satellites = TLEParser::getData(argv[1]);
 
 
 	User::getInput(satellites);

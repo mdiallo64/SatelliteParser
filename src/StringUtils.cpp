@@ -2,7 +2,6 @@
 #include "StringUtils.h"
 #include <algorithm>
 #include <cctype>
-#include "Satellite.h"
 
 
 namespace StringUtils

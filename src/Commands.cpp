@@ -29,7 +29,7 @@ namespace Commands
 		std::cout << '\n';
 	}
 
-	void filterbyRegime(const std::vector<Satellite>& satellites, const std::string regime)
+	void filterbyRegime(const std::vector<Satellite>& satellites, const std::string& regime)
 	{
 		std::cout << "Current filter applied: " << regime << " \n";
 		bool found{ false };

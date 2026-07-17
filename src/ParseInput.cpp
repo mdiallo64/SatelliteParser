@@ -6,10 +6,9 @@
 
 namespace User
 {
-	States currentState = Main;
 
 
-	void printMenu()//what user sees based off current state
+	void printMenu(States& currentState)//what user sees based off current state
 	{
 		if (currentState == Main)
 		{
@@ -24,6 +23,7 @@ namespace User
 
 	void getInput(const std::vector<Satellite>& satellites)
 	{
+		States currentState = Main;
 		std::string userCommand{};
 
 		//outer map consists of state and another map
@@ -41,7 +41,7 @@ namespace User
 
 		while (true)
 		{
-			printMenu();
+			printMenu(currentState);
 
 			std::cout << "Enter Command >> ";
 			std::getline(std::cin, userCommand);

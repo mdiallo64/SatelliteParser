@@ -1,5 +1,3 @@
-#ifndef TLEPARSER_H
-#define TLEPARSER_H
 
 #include "TLEParser.h"
 #include <iostream>
@@ -55,10 +53,9 @@ namespace TLEParser
 
 		}
 
-		std::cout << "TLE Satellite Parser|\n\n";
+		std::cout << "TLE Satellite Parser\n\n";
 		std::cout << satellites.size() << " Satellites loaded\n";
 		std::cout << "\n";
 		return satellites;
 	}
 }
-#endif

@@ -12,7 +12,7 @@ namespace Commands
 	void List(const std::vector<Satellite>& satellites);
 
 
-	void filterbyRegime(const std::vector<Satellite>& satellites, const std::string regime);
+	void filterbyRegime(const std::vector<Satellite>& satellites, const std::string& regime);
 
 
 	void filterCatNum(const std::vector<Satellite>& satellites);
