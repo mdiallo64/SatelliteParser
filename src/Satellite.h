@@ -3,8 +3,6 @@
 
 #include <string>
 #include <iostream>
-#include <cmath>
-#include <format>
 
 //Gravitational parameter of earth
 constexpr double GP{ 3.986e14 }; //m^3/ s^2
@@ -12,69 +10,34 @@ constexpr double PI{ 3.14159265359 };
 constexpr double EARTHRADIUS{ 6371 }; //km
 
 
-
-
-
 class Satellite
 {
 public:
-	Satellite(std::string name,std::string catalogNum, double inclination, double eccentricity, double meanMotion) 
-		: m_name{name}
-		, m_catalogNum{catalogNum}
-		, m_inclination{inclination}
-		, m_eccentricity{eccentricity}
-		, m_meanMotion{meanMotion}
-		{}
+	Satellite(std::string name, std::string catalogNum, double inclination, double eccentricity, double meanMotion);
 
-	double computePeriod() const
-	{
-		return (1 / m_meanMotion) * 1440; //1440 = minutes per day
-	}
 
-	double computeSemiMajorAxis() const
-	{
-		double T{ computePeriod() * 60 };
-		return std::cbrt(GP * T * T / (4 * PI * PI)) / 1000; //formula for orbital period
-	}
+	double computePeriod() const;
+
+
+	double computeSemiMajorAxis() const;
+
 	
-	double computeAltitude() const
-	{
-		return computeSemiMajorAxis() - EARTHRADIUS;
-	}
+	double computeAltitude() const;
+
 
 	enum class OrbitRegime { LEO, MEO, GEO };
 
 
-	OrbitRegime calcRegime() const
-	{
-		double altitude{ computeAltitude() };
-		if (altitude < 2000)
-		{
-			return OrbitRegime::LEO;
-		}
-		else if(altitude < 35786)
-		{
-			return OrbitRegime::MEO;
-		}
-		else
-			return OrbitRegime::GEO;
-	}
+	OrbitRegime calcRegime() const;
 
+	void showSat() const;
 
-	void showSat() const
-	{
-		std::cout << std::format("{:<25}", m_name);
-		std::cout << std::format("{:<20}", m_catalogNum);
-		std::cout << std::format("{:<18}", m_inclination) ;
-		std::cout << std::format("{:<21}", m_eccentricity);
-		std::cout << std::format("{:<15}", m_meanMotion) << '\n';
-
-	}
-	std::string getName() const { return m_name; }
-	std::string getCatalogNum() const { return m_catalogNum; }
-	double getInclination() const { return m_inclination; }
-	double getEccentricity() const { return m_eccentricity; }
-	double getMeanMotion() const { return m_meanMotion; }
+	
+	std::string getName() const;
+	std::string getCatalogNum() const;
+	double getInclination() const;
+	double getEccentricity() const;
+	double getMeanMotion() const;
 
 private:
 
@@ -86,23 +49,8 @@ private:
 
 };
 
-inline std::string toString(const Satellite::OrbitRegime orbitRegime)
-{
-	std::string result{};
+std::string toString(const Satellite::OrbitRegime orbitRegime);
 
-	switch (orbitRegime)
-	{
-	case Satellite::OrbitRegime::LEO:
-		return "LEO";
-
-	case Satellite::OrbitRegime::MEO:
-		return "MEO";
-
-	case Satellite::OrbitRegime::GEO:
-		return "GEO";
-	}
-	return "Unknown";
-}
 
 
 #endif
