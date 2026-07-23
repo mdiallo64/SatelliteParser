@@ -1,14 +1,11 @@
-add_executable(SatelliteParser
-    main.cpp
+add_library(satlib
     Satellite.cpp
     TLEParser.cpp
     Commands.cpp
     ParseInput.cpp
-    StringUtils.cpp)
-set_property(TARGET SatelliteParser PROPERTY CXX_STANDARD 20)
-
-add_custom_command(TARGET SatelliteParser POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${CMAKE_SOURCE_DIR}/data/data.txt"
-        "$<TARGET_FILE_DIR:SatelliteParser>/data/data.txt"
+    StringUtils.cpp
 )
+target_include_directories(satlib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_executable(SatelliteParser main.cpp)
+target_link_libraries(SatelliteParser PRIVATE satlib)

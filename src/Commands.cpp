@@ -21,9 +21,10 @@ namespace Commands
 	}
 	void List(const std::vector<Satellite>& satellites)
 	{
+		printHeader();
 		for (auto& satellite : satellites)
 		{
-			std::cout << satellite.getName() << '\n';
+			satellite.showSat();
 
 		}
 		std::cout << '\n';
