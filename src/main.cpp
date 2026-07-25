@@ -7,6 +7,12 @@
 
 int main(int argc, char* argv[])
 {
+
+	if (argc < 2)
+	{
+		std::cerr << "Usage: " << argv[0] << " <path-to-tle-file>\n"; //usage line
+		return 1;
+	}
 	std::vector<Satellite> satellites = TLEParser::getData(argv[1]);
 
 
