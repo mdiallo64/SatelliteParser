@@ -16,6 +16,11 @@ int main(int argc, char* argv[])
 	std::vector<Satellite> satellites = TLEParser::getData(argv[1]);
 
 
+	std::cout << "TLE Satellite Parser\n\n";
+	std::cout << satellites.size() << " Satellites loaded\n";
+	std::cout << "\n";
+
+
 	User::getInput(satellites);
 
 	return 0;
