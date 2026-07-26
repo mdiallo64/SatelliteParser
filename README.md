@@ -14,7 +14,7 @@
 * cmake --build . 
 
 ## Run:
-* ./src/SatelliteParser src/data/data.txt 
+* ./src/SatelliteParser ../data/data.txt 
 
 ## Data:
 To change data input, visit https://celestrak.org/NORAD/elements/index.php?FORMAT=tle and download or copy and set as TLE data. If downloaded replace with current file in /data. If copied replace current contents with copied:
