@@ -17,7 +17,7 @@
 * ./src/SatelliteParser ../data/data.txt 
 
 ## Data:
-To change data input, visit https://celestrak.org/NORAD/elements/index.php?FORMAT=tle and download or copy and set as TLE data. If downloaded replace with current file in /data. If copied replace current contents with copied:
+To change data set of satellites, visit https://celestrak.org/NORAD/elements/index.php?FORMAT=tle,  select TLE data, and download or copy. If downloaded replace with current file in /data. If copied replace current contents with copied:
 
 <img width="230" height="87" alt="image" src="https://github.com/user-attachments/assets/9702b20f-3980-4048-bfef-cea15c4d94c9" />
 
